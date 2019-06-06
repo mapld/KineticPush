@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
+    public GameObject fireBall;
+
     public float movementSpeed;
 
     private Rigidbody2D rigidBody;
@@ -24,5 +26,11 @@ public class Controls : MonoBehaviour
         movementVector.y = Input.GetAxis("Vertical") * movementSpeed;
 
         rigidBody.velocity = movementVector;
+
+        if (Input.GetAxis("Fire1") != 0)
+        {
+            GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
+            ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 10);
+        }
     }
 }
