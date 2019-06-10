@@ -5,12 +5,12 @@ using UnityEngine;
 public class Controls : MonoBehaviour
 {
     public GameObject fireBall;
-
+    public float cooldownTime;
     public float movementSpeed;
 
     private Rigidbody2D rigidBody;
-
     private Vector2 movementVector;
+    private float nextCooldown;
     
     // Start is called before the first frame update
     void Start()
@@ -27,10 +27,11 @@ public class Controls : MonoBehaviour
 
         rigidBody.velocity = movementVector;
 
-        if (Input.GetAxis("Fire1") != 0)
+        if (Input.GetAxis("Fire1") != 0 & (nextCooldown < Time.time))
         {
             GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
             ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 10);
+            nextCooldown = Time.time + cooldownTime;
         }
     }
 }
