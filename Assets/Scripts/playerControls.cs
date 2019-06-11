@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controls : MonoBehaviour
+public class playerControls : MonoBehaviour
 {
     public GameObject fireBall;
     public float cooldownTime;
@@ -30,8 +30,13 @@ public class Controls : MonoBehaviour
         if (Input.GetAxis("Fire1") != 0 & (nextCooldown < Time.time))
         {
             GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
-            ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 10);
+            //ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 10);
+
+            ball.GetComponent<Rigidbody2D>().velocity = transform.right * 10;
+
             nextCooldown = Time.time + cooldownTime;
+
         }
+
     }
 }
