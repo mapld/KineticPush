@@ -10,6 +10,7 @@ public class playerControls : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private Vector2 movementVector;
+    private Vector2 directionVector;
     private float nextCooldown;
     
     // Start is called before the first frame update
@@ -22,20 +23,25 @@ public class playerControls : MonoBehaviour
     void Update()
     {
         movementVector.x = Input.GetAxis("Horizontal") * movementSpeed;
-
         movementVector.y = Input.GetAxis("Vertical") * movementSpeed;
-
         rigidBody.velocity = movementVector;
+
 
         if (Input.GetAxis("Fire1") != 0 & (nextCooldown < Time.time))
         {
-            GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
-            //ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 10);
+            // Creates an angle from the axes.
+            directionVector.x = Input.GetAxis("Mouse X");
+            directionVector.y = Input.GetAxis("Mouse Y");
+            directionVector.Normalize();
+            float directionAngle = (Mathf.Atan2(directionVector.x, directionVector.y) * 180 / Mathf.PI);
 
+            Debug.Log(directionAngle);
+            transform.eulerAngles = new Vector3 (0f, 0f, 90 - directionAngle);
+
+            GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
             ball.GetComponent<Rigidbody2D>().velocity = transform.right * 10;
 
             nextCooldown = Time.time + cooldownTime;
-
         }
 
     }
