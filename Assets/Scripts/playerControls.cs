@@ -26,16 +26,19 @@ public class playerControls : MonoBehaviour
         movementVector.y = Input.GetAxis("Vertical") * movementSpeed;
         rigidBody.velocity = movementVector;
 
+            
 
         if (Input.GetAxis("Fire1") != 0 & (nextCooldown < Time.time))
         {
             // Creates an angle from the axes.
-            directionVector.x = Input.GetAxis("Mouse X");
-            directionVector.y = Input.GetAxis("Mouse Y");
+            directionVector.x = Input.GetAxis("HorizontalTurn");
+            directionVector.y = Input.GetAxis("VerticalTurn");
             directionVector.Normalize();
+            Debug.Log(directionVector);
             float directionAngle = (Mathf.Atan2(directionVector.x, directionVector.y) * 180 / Mathf.PI);
 
             Debug.Log(directionAngle);
+
             transform.eulerAngles = new Vector3 (0f, 0f, 90 - directionAngle);
 
             GameObject ball = Instantiate(fireBall, transform.position, Quaternion.identity) as GameObject;
