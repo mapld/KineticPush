@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -58,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -93,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5daf0789cc4934d8de0d4e066dd027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
-  speed: 0.2
-  strength: 0.25
+  duration: 0.5
+  speed: 0.4
+  strength: 0.4
 --- !u!58 &-7160248578088338814
 CircleCollider2D:
   m_ObjectHideFlags: 0

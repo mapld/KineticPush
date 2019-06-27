@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     private float forceStrength;
     private float forceTime; 
     private float nextCooldown;
+    public string playerNumber;
     
     // Start is called before the first frame update
     void Start()
@@ -25,8 +26,8 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        movementVector.x = Input.GetAxis("Horizontal") * movementSpeed;
-        movementVector.y = Input.GetAxis("Vertical") * movementSpeed;
+        movementVector.x = Input.GetAxis(playerNumber+"Horizontal") * movementSpeed;
+        movementVector.y = Input.GetAxis(playerNumber+"Vertical") * movementSpeed;
         Vector3 velocity = movementVector * movementSpeed;
 
         Vector3 forceVelocity = Vector3.zero;
@@ -36,11 +37,11 @@ public class PlayerControls : MonoBehaviour
 
         transform.position += velocity + forceVelocity;
 
-        if (Input.GetAxis("Fire1") != 0 & (nextCooldown < Time.time))
+        if (Input.GetAxis(playerNumber+"Fire") != 0 & (nextCooldown < Time.time))
         {
             // Creates an angle from the axes.
-            aimVector.x = Input.GetAxis("HorizontalTurn");
-            aimVector.y = Input.GetAxis("VerticalTurn");
+            aimVector.x = Input.GetAxis(playerNumber+"HorizontalTurn");
+            aimVector.y = Input.GetAxis(playerNumber+"VerticalTurn");
             aimVector.Normalize();
             Debug.Log(aimVector);
             float directionAngle = (Mathf.Atan2(aimVector.x, aimVector.y) * 180 / Mathf.PI);
