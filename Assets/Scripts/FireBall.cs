@@ -36,9 +36,16 @@ public class FireBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Vector3 difference = col.transform.position - transform.position;
-        difference.Normalize();
-        Debug.Log("difference: (for Alex)   " + difference);
-        col.gameObject.GetComponent<PlayerControls>().AddForce(difference, strength);
+        if(col.gameObject != player)
+        {
+            Vector3 difference = col.transform.position - transform.position;
+            difference.Normalize();
+            Debug.Log("difference: (for Alex)   " + difference);
+            col.gameObject.GetComponent<PlayerControls>().AddForce(difference, strength);
+
+            // End this projectile's life
+            Destroy(this.gameObject);
+        }
+
     }
 }

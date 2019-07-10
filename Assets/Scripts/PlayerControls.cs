@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class PlayerControls : MonoBehaviour
     public float cooldownTime;
     public float movementSpeed;
     public float knockBackDuration;
+
+    public float knockbackPercent;
+    public GameObject percentText;
 
     private Vector2 movementVector;
     private Vector2 aimVector;
@@ -20,7 +24,8 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Text text = percentText.GetComponent<Text>();
+        text.text = this.knockbackPercent + "%";
     }
 
     // Update is called once per frame
@@ -62,6 +67,15 @@ public class PlayerControls : MonoBehaviour
     public void AddForce(Vector3 forceDirection, float forceStrength) {
         forceTime = Time.time;
         this.forceDirection = forceDirection;
-        this.forceStrength = forceStrength;
+
+        float percentKnockback = 2.0f;
+
+        this.forceStrength = forceStrength * (1 + this.knockbackPercent*percentKnockback/100.0f);
+
+        // Add % 
+        this.knockbackPercent += 150;
+
+        Text text = percentText.GetComponent<Text>();
+        text.text = this.knockbackPercent + "%";
     }
 }
